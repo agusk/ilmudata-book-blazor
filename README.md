@@ -1,4 +1,4 @@
-# Hallo Blazor: Building Modern Full-Stack Web Apps with .NET 9
+# Hallo Blazor: Building Modern Full-Stack Web Apps with .NET 9.0
 
 <img src="images/cover.png"  width="320">
 
