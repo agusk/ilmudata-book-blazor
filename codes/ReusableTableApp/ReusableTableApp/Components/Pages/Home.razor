@@ -1,0 +1,19 @@
+﻿@page "/"
+@using ReusableTableApp.Models
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<TableComponent Products="Products" />
+
+@code {
+    private List<Product> Products = new List<Product>
+    {
+        new Product { Id = 1, Name = "Laptop", Price = 1000 },
+        new Product { Id = 2, Name = "Smartphone", Price = 700 },
+        new Product { Id = 3, Name = "Tablet", Price = 500 }
+    };    
+}

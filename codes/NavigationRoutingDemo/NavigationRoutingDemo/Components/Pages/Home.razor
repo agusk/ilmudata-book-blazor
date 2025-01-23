@@ -1,0 +1,27 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+
+<div>
+    <p>This is a simple page that demonstrates navigation in Blazor.</p>
+    <p>Click below to go to the About page.</p>
+    
+    <NavLink class="btn btn-primary" href="/about">Go to About Page</NavLink>
+    <button class="btn btn-secondary" @onclick="NavigateToAbout">Go to About Page (Programmatically)</button>
+
+</div>
+
+
+@code {
+    private void NavigateToAbout()
+    {
+        Navigation.NavigateTo("/about");
+    }
+}

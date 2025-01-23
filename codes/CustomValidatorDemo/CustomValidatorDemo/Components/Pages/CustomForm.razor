@@ -1,0 +1,35 @@
+﻿@page "/customform"
+@using CustomValidatorDemo.Models
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<h3>Custom Form</h3>
+
+<EditForm Model="User" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label>Name:</label>
+        <InputText @bind-Value="User.Name" class="form-control" />
+        <ValidationMessage For="() => User.Name" />
+    </div>
+
+    <div class="form-group">
+        <label>Age:</label>
+        <InputNumber @bind-Value="User.Age" class="form-control" />
+        <ValidationMessage For="() => User.Age" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+    private UserModel User = new UserModel();
+
+    private void HandleSubmit()
+    {
+        Navigation.NavigateTo($"/summary?name={User.Name}&age={User.Age}");
+    }
+
+
+}

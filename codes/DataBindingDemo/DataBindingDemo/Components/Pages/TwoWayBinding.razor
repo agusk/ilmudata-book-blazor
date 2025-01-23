@@ -1,0 +1,10 @@
+﻿@page "/twoway"
+@rendermode InteractiveServer
+
+<h3>Two-Way Data Binding</h3>
+<input @bind="UserName" placeholder="Enter your name" class="form-control" />
+<p>Hello, @UserName!</p>
+
+@code {
+    private string UserName { get; set; } = string.Empty;
+}

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPwaApi", "BlazorPwaApi\BlazorPwaApi.csproj", "{DB56C808-F739-429E-AEA1-104CD606E8CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPwaApp", "BlazorPwaApp\BlazorPwaApp.csproj", "{23F0CD9C-DDA0-4BED-9C17-BB469CF818BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB56C808-F739-429E-AEA1-104CD606E8CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB56C808-F739-429E-AEA1-104CD606E8CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB56C808-F739-429E-AEA1-104CD606E8CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB56C808-F739-429E-AEA1-104CD606E8CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F0CD9C-DDA0-4BED-9C17-BB469CF818BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F0CD9C-DDA0-4BED-9C17-BB469CF818BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F0CD9C-DDA0-4BED-9C17-BB469CF818BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F0CD9C-DDA0-4BED-9C17-BB469CF818BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

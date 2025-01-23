@@ -1,0 +1,34 @@
+﻿@page "/summary"
+
+@inject NavigationManager Navigation
+
+<h3>Registration Summary</h3>
+
+<p><strong>Name:</strong> @Name</p>
+<p><strong>Email:</strong> @Email</p>
+<p><strong>Username:</strong> @Username</p>
+<p><strong>Address:</strong> @Address</p>
+<p><strong>Profession:</strong> @Profession</p>
+<p><strong>Gender:</strong> @Gender</p>
+
+@code {
+    [Parameter] public string Name { get; set; } = string.Empty;
+    [Parameter] public string Email { get; set; } = string.Empty;
+    [Parameter] public string Username { get; set; } = string.Empty;
+    [Parameter] public string Address { get; set; } = string.Empty;
+    [Parameter] public string Profession { get; set; } = string.Empty;
+    [Parameter] public string Gender { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        var query = new Uri(Navigation.Uri).Query;
+        var parameters = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(query);
+
+        Name = parameters["name"]!;
+        Email = parameters["email"]!;
+        Username = parameters["username"]!;
+        Address = parameters["address"]!;
+        Profession = parameters["profession"]!;
+        Gender = parameters["gender"]!;
+    }
+}

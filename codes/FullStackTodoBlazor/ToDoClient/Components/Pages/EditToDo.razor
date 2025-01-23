@@ -1,0 +1,40 @@
+﻿@page "/todos/edit/{Id:int}"
+
+@using ToDoClient.Models
+@using ToDoClient.Services
+
+@inject NavigationManager Navigation
+@inject IToDoService ToDoService
+@rendermode InteractiveServer
+
+<h3>Edit To-Do</h3>
+
+<EditForm Model="Item" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Title:</label>
+        <InputText @bind-Value="Item.Title" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private ToDoItem Item = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Item = await ToDoService.GetByIdAsync(Id);
+    }
+
+    private async Task HandleSubmit()
+    {
+        await ToDoService.UpdateAsync(Item);
+        Navigation.NavigateTo("/todos");
+    }
+}

@@ -1,0 +1,47 @@
+﻿@page "/search"
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<h3>Search Page</h3>
+<p>Query: @Query</p>
+
+<button class="btn btn-secondary" @onclick="NavigateToCustomSearch">Search for "Blazor" (Programmatically)</button>
+
+@code {
+    private string Query { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += HandleLocationChanged;
+        UpdateQuery();
+    }
+
+    private void HandleLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        UpdateQuery();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void UpdateQuery()
+    {
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        if (Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query).TryGetValue("query", out var query))
+        {
+            Query = query;
+        }
+        else
+        {
+            Query = string.Empty;
+        }
+    }
+
+    private void NavigateToCustomSearch()
+    {
+        Navigation.NavigateTo("/search?query=Blazor");
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= HandleLocationChanged;
+    }
+}

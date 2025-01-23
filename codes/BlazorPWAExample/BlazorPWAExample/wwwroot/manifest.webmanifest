@@ -1,0 +1,38 @@
+{
+  "name": "BlazorPWAExample",
+  "short_name": "BlazorPWAExample",
+  "id": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03173d",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "1912x956",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Application"
+    },
+    {
+      "src": "screenshot1.png",
+      "sizes": "1912x956",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Application"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+﻿@page "/view"
+
+@inject NavigationManager Navigation
+
+<h3>Uploaded Image</h3>
+
+<img src="@FileUrl" alt="Uploaded Image" style="max-width:100%;" />
+<p>Description: @Description</p>
+
+@code {
+    [Parameter] public string FileUrl { get; set; } = string.Empty;
+    [Parameter] public string Description { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        var query = new Uri(Navigation.Uri).Query;
+        var parameters = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(query);
+        FileUrl = parameters["fileUrl"];
+        Description = parameters["description"];
+    }
+}

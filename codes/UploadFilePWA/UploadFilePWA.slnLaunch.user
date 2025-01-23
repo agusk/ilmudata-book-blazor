@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "ImageUploadApi\\ImageUploadApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ImageUploadApp\\ImageUploadApp.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

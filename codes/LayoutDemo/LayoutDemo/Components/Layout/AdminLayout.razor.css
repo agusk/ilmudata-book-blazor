@@ -1,0 +1,29 @@
+﻿.admin-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: 100vh;
+}
+
+aside {
+    background-color: #343a40;
+    color: white;
+    padding: 15px;
+}
+
+    aside ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    aside li {
+        margin: 10px 0;
+    }
+
+    aside a {
+        color: white;
+        text-decoration: none;
+    }
+
+section {
+    padding: 20px;
+}

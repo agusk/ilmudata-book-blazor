@@ -1,0 +1,26 @@
+﻿@rendermode InteractiveServer
+
+@code {
+    private string UserName { get; set; } = string.Empty;
+    private string GreetingMessage { get; set; } = string.Empty;
+
+    private void GreetUser()
+    { 
+        if (!string.IsNullOrWhiteSpace(UserName))
+        {
+            GreetingMessage = $"Hello, {UserName}! Welcome to Blazor.";
+        }
+        else
+        {
+            GreetingMessage = "Please enter your name.";
+        }
+    }
+}
+
+
+<div>
+    <h3>Personalized Greeting</h3>
+    <input @bind="UserName" placeholder="Enter your name" class="form-control" />
+    <button @onclick="GreetUser" class="btn btn-primary mt-2">Greet</button>
+    <p class="mt-2">@GreetingMessage</p>
+</div>

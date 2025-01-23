@@ -1,0 +1,57 @@
+﻿@page "/todos"
+
+@using ToDoClient.Models
+@using ToDoClient.Services
+@inject NavigationManager Navigation
+@inject IToDoService ToDoService
+@rendermode InteractiveServer
+
+<h3>To-Do List</h3>
+
+<button @onclick="NavigateToAdd" class="btn btn-primary">Add To-Do</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todo in ToDos)
+        {
+            <tr>
+                <td>@todo.Title</td>
+                <td>
+                    <button @onclick="() => NavigateToEdit(todo.Id)" class="btn btn-warning">Edit</button>
+                    <button @onclick="() => NavigateToDelete(todo.Id)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<ToDoItem> ToDos = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ToDos = await ToDoService.GetAllAsync();
+    }
+
+    private void NavigateToAdd()
+    {
+        Navigation.NavigateTo("/todos/add");
+    }
+
+    private void NavigateToEdit(int id)
+    {
+        Navigation.NavigateTo($"/todos/edit/{id}");
+    }
+
+    private void NavigateToDelete(int id)
+    {
+        Navigation.NavigateTo($"/todos/delete/{id}");
+    }
+}
+

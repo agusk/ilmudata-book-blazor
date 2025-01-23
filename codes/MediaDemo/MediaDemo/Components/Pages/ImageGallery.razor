@@ -1,0 +1,26 @@
+﻿@page "/imagegallery"
+@rendermode InteractiveServer
+
+<h3>Image Gallery</h3>
+
+<div class="image-gallery">
+
+    @foreach (var image in Images)
+    {
+        <div class="image-item">
+            <img src="@image" alt="Public Photo" class="gallery-image" />
+        </div>
+    }
+
+</div>
+
+@code {
+    private List<string> Images = new List<string>
+    {
+        "images/img1.png",
+        "images/img2.png",
+        "images/img3.png",
+        "images/img4.png",
+        "images/img5.png",
+    };
+}

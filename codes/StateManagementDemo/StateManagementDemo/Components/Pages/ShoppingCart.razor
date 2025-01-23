@@ -1,0 +1,27 @@
+﻿@page "/shoppingcart"
+
+@rendermode InteractiveServer
+@using StateManagementDemo.Services
+@inject CartService CartService
+
+<h3>Shopping Cart</h3>
+
+<ul>
+
+    @foreach (var item in CartService.Items)
+    {
+        <li>@item</li>
+    }
+
+</ul>
+
+<button @onclick="AddItem">Add Item</button>
+
+@code {
+    private int itemCounter = 1;
+
+    private void AddItem()
+    {
+        CartService.AddItem($"Item {itemCounter++}");
+    }
+}

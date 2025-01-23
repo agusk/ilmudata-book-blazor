@@ -1,0 +1,76 @@
+﻿@page "/upload"
+
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Navigation
+@using ImageUploadApp.Models
+@using System.Text.Json
+
+<h3>Upload Image</h3>
+
+<EditForm Model="UploadForm" OnValidSubmit="HandleUpload">
+    <div class ="form-group">
+        <label>Image File:</label>
+        <InputFile OnChange="HandleFileChange" />
+    </div>
+
+    <div class="form-group">
+        <label>Description:</label>
+        <InputText @bind-Value="UploadForm!.Description" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Upload</button>
+</EditForm>
+
+<p>@UploadStatus</p>
+
+@code {
+    private UploadModel UploadForm = new();
+
+    private IBrowserFile? SelectedFile;
+    private string UploadStatus = string.Empty;
+    private HttpClient? httpClient;
+
+    protected override Task OnInitializedAsync()
+    {
+        httpClient = HttpClientFactory.CreateClient("ExternalApi");
+
+        return base.OnInitializedAsync();
+    }
+
+    private void HandleFileChange(InputFileChangeEventArgs e)
+    {
+        SelectedFile = e.File;
+    }
+
+    private async Task HandleUpload()
+    {
+        if (SelectedFile is null)
+        {
+            UploadStatus = "Please select a file.";
+            return;
+        }
+
+        using var content = new MultipartFormDataContent();
+        content.Add(new StreamContent(SelectedFile.OpenReadStream()), "file", SelectedFile.Name);
+        content.Add(new StringContent(UploadForm!.Description), "description");
+
+        var response = await httpClient!.PostAsync("/api/upload", content);
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Response Content: {responseContent}");
+
+            var result = JsonSerializer.Deserialize<UploadResult>(responseContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            Navigation.NavigateTo($"/view?fileUrl={Uri.EscapeDataString(result!.FileUrl)}&description={Uri.EscapeDataString(result.Description)}");
+        }
+        else
+        {
+            UploadStatus = "Upload failed.";
+        }
+    }
+    
+}

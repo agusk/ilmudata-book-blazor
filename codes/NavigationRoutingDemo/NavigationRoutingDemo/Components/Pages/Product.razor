@@ -1,0 +1,12 @@
+﻿@page "/product/{ProductId:int}"
+@rendermode InteractiveServer
+
+<h3>Product Page</h3>
+<p>Product ID: @ProductId</p>
+
+<NavLink class="btn btn-primary" href="/search?query=laptop">Search for Laptops</NavLink>
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+}

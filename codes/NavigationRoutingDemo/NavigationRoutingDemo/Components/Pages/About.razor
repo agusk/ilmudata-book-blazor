@@ -1,0 +1,17 @@
+﻿@page "/about"
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<h3>About Page</h3>
+
+<p>This is the about page. Click below to go to the Product page with parameters.</p>
+
+<NavLink class="btn btn-secondary" href="/product/101">View Product 101</NavLink>
+<button class="btn btn-primary" @onclick="() => NavigateToProduct(202)">View Product 202 (Programmatically)</button>
+
+@code {
+    private void NavigateToProduct(int productId)
+    {
+        Navigation.NavigateTo($"/product/{productId}");
+    }
+}

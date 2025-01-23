@@ -1,0 +1,29 @@
+﻿@page "/jsinterop"
+@inject IJSRuntime JSRuntime
+
+<h3>JavaScript Interop Demo</h3>
+
+<button class="btn btn-primary" @onclick="ShowAlert">Show Alert</button>
+<button class="btn btn-secondary" @onclick="ChangeBackground">Change Background Color</button>
+<button class="btn btn-info" @onclick="DisplayBrowserInfo">Get Browser Info</button>
+
+<p>@BrowserInfo</p>
+
+@code {
+    private string BrowserInfo = string.Empty;
+
+    private async Task ShowAlert()
+    {
+        await JSRuntime.InvokeVoidAsync("jsFunctions.showAlert", "Hello from Blazor!");
+    }
+
+    private async Task ChangeBackground()
+    {
+        await JSRuntime.InvokeVoidAsync("jsFunctions.changeBackgroundColor", "lightblue");
+    }
+
+    private async Task DisplayBrowserInfo()
+    {
+        BrowserInfo = await JSRuntime.InvokeAsync<string>("jsFunctions.getBrowserInfo");
+    }
+}

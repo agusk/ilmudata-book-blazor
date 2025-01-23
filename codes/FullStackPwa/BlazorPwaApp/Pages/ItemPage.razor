@@ -1,0 +1,33 @@
+﻿@page "/items"
+
+@using BlazorPwaApp.Services
+@inject ItemService ItemService
+
+<h3>Items</h3>
+
+<ul>
+    @foreach (var item in Items)
+    {
+        <li>@item</li>
+    }
+</ul>
+
+<input type="text" @bind="NewItem" placeholder="Add item" />
+<button @onclick="AddItem" class="btn btn-primary">Add</button>
+
+@code {
+    private List<string> Items = new();
+    private string NewItem = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await ItemService.GetItemsAsync();
+    }
+
+    private async Task AddItem()
+    {
+        await ItemService.AddItemAsync(NewItem);
+        Items.Add(NewItem);
+        NewItem = string.Empty;
+    }
+}

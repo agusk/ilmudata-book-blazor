@@ -1,0 +1,26 @@
+﻿@page "/"
+@using BlazorDIExample.Services
+
+@inject IGreetingService TransientService
+@inject SingletonGreetingService SingletonService
+
+<PageTitle>Dependency Injection in Blazor</PageTitle>
+
+<h1>Dependency Injection in Blazo</h1>
+
+<h3>Transient Service</h3>
+<p>@TransientGreeting</p>
+
+<h3>Singleton Service</h3>
+<p>@SingletonGreeting</p>
+
+@code {
+    private string TransientGreeting = "";
+    private string SingletonGreeting = "";
+
+    protected override void OnInitialized()
+    {
+        TransientGreeting = TransientService.GetGreeting();
+        SingletonGreeting = SingletonService.GetGreeting();
+    }
+}

@@ -1,0 +1,42 @@
+﻿@rendermode InteractiveServer
+
+@code {
+
+    [Parameter]
+    public string Message { get; set; } = "Default message";
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("LifecycleLogger: OnInitialized called");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("LifecycleLogger: OnParametersSet called");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Console.WriteLine("LifecycleLogger: OnAfterRender called for the first time");
+        }
+        else
+        {
+            Console.WriteLine("LifecycleLogger: OnAfterRender called");
+        }
+    }
+
+    public void Dispose()
+    {
+        Console.WriteLine("LifecycleLogger: Dispose called");
+    }
+}
+
+
+<div>
+    <h3>Lifecycle Logger Component</h3>
+    <p>Check the browser console for lifecycle event logs.</p>
+
+    <p>Message: @Message</p>
+</div>

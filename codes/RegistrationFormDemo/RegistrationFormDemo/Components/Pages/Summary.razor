@@ -1,0 +1,29 @@
+﻿@page "/summary"
+@inject NavigationManager Navigation
+
+<h3>Summary</h3>
+
+@if (UserData is not null)
+{
+    <ul>
+        <li><strong>Name:</strong> @UserData["name"]</li>
+        <li><strong>Email:</strong> @UserData["email"]</li>
+        <li><strong>Username:</strong> @UserData["username"]</li>
+        <li><strong>Password:</strong> @UserData["password"]</li>
+        <li><strong>Address:</strong> @UserData["address"]</li>
+        <li><strong>Profession:</strong> @UserData["profession"]</li>
+        <li><strong>Gender:</strong> @UserData["gender"]</li>
+    </ul>
+}
+
+
+@code {
+    private Dictionary<string, string> UserData = new();
+
+    protected override void OnInitialized()
+    {
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+        UserData = query.ToDictionary(kvp => kvp.Key, kvp => Convert.ToString(kvp.Value));
+    }
+}

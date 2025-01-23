@@ -1,0 +1,9 @@
+﻿@page "/oneway"
+@rendermode InteractiveServer
+
+<h3>One-Way Data Binding</h3>
+<p>The current time is: @CurrentTime</p>
+
+@code {
+    private string CurrentTime => DateTime.Now.ToString("hh:mm:ss tt");
+}

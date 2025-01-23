@@ -1,0 +1,37 @@
+﻿@page "/todos/delete/{Id:int}"
+
+@using ToDoClient.Models
+@using ToDoClient.Services
+@inject NavigationManager Navigation
+@inject IToDoService ToDoService
+@rendermode InteractiveServer
+
+<h3>Delete To-Do</h3>
+
+<p>Are you sure you want to delete "@Item.Title"?</p>
+
+<button @onclick="HandleDelete" class="btn btn-danger">Yes, Delete</button>
+<button @onclick="Cancel" class="btn btn-secondary">Cancel</button>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private ToDoItem Item = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Item = await ToDoService.GetByIdAsync(Id);
+    }
+
+    private async Task HandleDelete()
+    {
+        await ToDoService.DeleteAsync(Id);
+        Navigation.NavigateTo("/todos");
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/todos");
+    }
+}

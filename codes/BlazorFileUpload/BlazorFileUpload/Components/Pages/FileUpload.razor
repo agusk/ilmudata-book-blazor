@@ -1,0 +1,42 @@
+﻿@page "/fileupload"
+
+@using BlazorFileUpload.Services
+@inject FileUploadService FileUploadService
+@rendermode InteractiveServer
+
+<h3>File Upload</h3>
+
+<EditForm Model="this" OnValidSubmit="HandleFileUpload">
+    <div class="form-group">
+        <label for="fileInput">Choose an image file:</label>
+        <InputFile OnChange="HandleFileSelected" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" disabled="@(!IsFileSelected)">Upload</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(UploadedFilePath))
+{
+    <h4>Uploaded Image:</h4>
+    <img src="@UploadedFilePath" alt="Uploaded Image" style="max-width: 400px;" />
+}
+
+
+@code {
+    private IBrowserFile? SelectedFile;
+    private string UploadedFilePath = string.Empty;
+    private bool IsFileSelected => SelectedFile != null;
+
+    private void HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        SelectedFile = e.File;
+    }
+
+    private async Task HandleFileUpload()
+    {
+        if (SelectedFile != null)
+        {
+            UploadedFilePath = await FileUploadService.SaveFileAsync(SelectedFile);
+        }
+    }
+}

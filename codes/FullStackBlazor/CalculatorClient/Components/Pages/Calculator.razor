@@ -1,0 +1,64 @@
+﻿@page "/calculator"
+@using CalculatorClient.Models
+@rendermode InteractiveServer
+@inject HttpClient HttpClient
+
+<h3>Calculator</h3>
+
+<div>
+    <div class="form-group">
+        <label>First Number:</label>
+        <input type="number" @bind="Number.Number1" />
+    </div>
+
+    <div class="form-group">
+        <label>Second Number:</label>
+        <input type="number" @bind="Number.Number2" />
+    </div>
+
+    <div class="form-group">
+        <button @onclick="Add">Add</button>
+        <button @onclick="Subtract">Subtract</button>
+        <button @onclick="Multiply">Multiply</button>
+        <button @onclick="Divide">Divide</button>
+    </div>
+</div>
+
+<p>Result: @Number.Result</p>
+
+@code {
+    private Number Number { get; set; } = new Number();
+
+    private async Task Add()
+    {
+        var response = await HttpClient.PostAsJsonAsync("api/calculate/add", Number);
+        Number = await response.Content.ReadFromJsonAsync<Number>() ?? new Number();
+    }
+
+    private async Task Subtract()
+    {
+        var response = await HttpClient.PostAsJsonAsync("api/calculate/subtract", Number);
+        Number = await response.Content.ReadFromJsonAsync<Number>() ?? new Number();
+    }
+
+    private async Task Multiply()
+    {
+        var response = await HttpClient.PostAsJsonAsync("api/calculate/multiply", Number);
+        Number = await response.Content.ReadFromJsonAsync<Number>() ?? new Number();
+    }
+
+    private async Task Divide()
+    {
+        var response = await HttpClient.PostAsJsonAsync("api/calculate/divide", Number);
+        if (response.IsSuccessStatusCode)
+        {
+            Number = await response.Content.ReadFromJsonAsync<Number>() ?? new Number();
+        }
+        else
+        {
+            // Handle error
+            var error = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(error);
+        }
+    }
+}

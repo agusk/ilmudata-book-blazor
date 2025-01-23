@@ -1,0 +1,32 @@
+﻿@page "/todos/add"
+
+@using ToDoClient.Models
+@using ToDoClient.Services
+
+@inject NavigationManager Navigation
+@inject IToDoService ToDoService
+@rendermode InteractiveServer
+
+<h3>Add To-Do</h3>
+
+<EditForm Model="NewToDo" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Title:</label>
+        <InputText @bind-Value="NewToDo.Title" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+
+@code {
+    private ToDoItem NewToDo = new();
+
+    private async Task HandleSubmit()
+    {
+        await ToDoService.AddAsync(NewToDo);
+        Navigation.NavigateTo("/todos");
+    }
+}

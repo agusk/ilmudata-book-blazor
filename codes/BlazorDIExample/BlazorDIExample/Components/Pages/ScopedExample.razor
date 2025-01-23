@@ -1,0 +1,16 @@
+﻿@page "/scoped"
+
+@using BlazorDIExample.Services
+@inject ScopedGreetingService ScopedService
+
+<h1>Scoped Service Example</h1>
+<p>@ScopedGreeting</p>
+
+@code {
+    private string ScopedGreeting = "";
+
+    protected override void OnInitialized()
+    {
+        ScopedGreeting = ScopedService.GetGreeting();
+    }
+}

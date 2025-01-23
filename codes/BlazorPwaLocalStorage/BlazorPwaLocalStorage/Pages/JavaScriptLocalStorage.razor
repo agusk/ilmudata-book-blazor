@@ -1,0 +1,35 @@
+﻿@page "/jslocalstore"
+
+@inject IJSRuntime JSRuntime
+
+<h3>Local Storage via JavaScript Interop</h3>
+
+<input type="text" @bind="Key" placeholder="Key" />
+<input type="text" @bind="Value" placeholder="Value" />
+<button @onclick="SaveToLocalStorage">Save</button>
+<button @onclick="LoadFromLocalStorage">Load</button>
+<button @onclick="ClearLocalStorage">Clear</button>
+
+<p>Stored Value: @StoredValue</p>
+
+@code {
+    private string Key = string.Empty;
+    private string Value = string.Empty;
+    private string StoredValue = string.Empty;
+
+    private async Task SaveToLocalStorage()
+    {
+        await JSRuntime.InvokeVoidAsync("localStorageHelper.setItem", Key, Value);
+    }
+
+    private async Task LoadFromLocalStorage()
+    {
+        StoredValue = await JSRuntime.InvokeAsync<string>("localStorageHelper.getItem", Key);
+    }
+
+    private async Task ClearLocalStorage()
+    {
+        await JSRuntime.InvokeVoidAsync("localStorageHelper.clear");
+        StoredValue = string.Empty;
+    }
+}

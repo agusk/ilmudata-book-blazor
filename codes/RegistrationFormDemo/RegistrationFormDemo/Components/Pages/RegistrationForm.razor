@@ -1,0 +1,80 @@
+﻿@page "/register"
+@using System.ComponentModel.DataAnnotations
+@using RegistrationFormDemo.Models
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+
+
+<EditForm Model="Model" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name:</label>
+        <InputText @bind-Value="Model!.Name" class="form-control" />
+        <ValidationMessage For="() => Model.Name" />
+    </div>
+
+    <div class="form-group">
+        <label>Email:</label>
+        <InputText @bind-Value="Model.Email" class="form-control" type="email" />
+        <ValidationMessage For="() => Model.Email" />
+    </div>
+
+    <div class="form-group">
+        <label>Username:</label>
+        <InputText @bind-Value="Model.Username" class="form-control" />
+        <ValidationMessage For="() => Model.Username" />
+    </div>
+
+    <div class="form-group">
+        <label>Password:</label>
+        <InputText @bind-Value="Model.Password" class="form-control" type="password" />
+        <ValidationMessage For="() => Model.Password" />
+    </div>
+
+    <div class="form-group">
+        <label>Address:</label>
+        <InputTextArea @bind-Value="Model.Address" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Profession:</label>
+        <InputSelect @bind-Value="Model.Profession" class="form-control">
+            <option value="">-- Select Profession --</option>
+
+            @foreach (var profession in Professions)
+            {
+                <option value="@profession">@profession</option>
+            }
+
+        </InputSelect>
+    </div>
+
+    
+    <div class="form-group">
+        <label>Gender:</label>
+        <InputRadioGroup @bind-Value="Model.Gender" class="form-control">
+            <InputRadio Value="@("Male")" /> Male
+            <InputRadio Value="@("Female")" /> Female
+        </InputRadioGroup>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <InputCheckbox @bind-Value="Model.Agree" /> I agree to the terms
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary" disabled="@(!Model.Agree)">Submit</button>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private UserModel? Model { get; set; }
+    private List<string> Professions = new List<string> { "Developer", "Designer", "Manager", "Engineer" };
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private void HandleSubmit() => Navigation.NavigateTo($"/summary?name={Model!.Name}&username={Model.Username}&password={Model.Password}&email={Model.Email}&address={Model.Address}&profession={Model.Profession}&gender={Model.Gender}");
+}
