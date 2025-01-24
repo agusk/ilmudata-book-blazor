@@ -46,7 +46,7 @@ Here is a list of exercises that you will find in the book:
 You can buy this book the following online stores:
 
 * Google Play Books: https://play.google.com/store/books/details?id=HnVBEQAAQBAJ
-* Lulu: 
+* Lulu: https://www.lulu.com/shop/agus-kurniawan/hallo-blazor-building-modern-full-stack-web-apps-with-net-90/ebook/product-nvzy848.html
 * Apple iBookstore: 
-* Leanpub:  
+* Leanpub: https://leanpub.com/blazor9/  
 
