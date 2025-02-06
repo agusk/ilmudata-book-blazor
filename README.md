@@ -48,5 +48,8 @@ You can buy this book the following online stores:
 * Google Play Books: https://play.google.com/store/books/details?id=HnVBEQAAQBAJ
 * Lulu: https://www.lulu.com/shop/agus-kurniawan/hallo-blazor-building-modern-full-stack-web-apps-with-net-90/ebook/product-nvzy848.html
 * Apple iBookstore: 
-* Leanpub: https://leanpub.com/blazor9/  
+* Leanpub: https://leanpub.com/blazor9/
+* Kobo: https://www.kobo.com/ww/en/ebook/hallo-blazor-building-modern-full-stack-web-apps-with-net-9-0
+* Smashwords: https://www.smashwords.com/books/view/1700607
+* Another online store: https://books2read.com/u/mBl2Mp
 
